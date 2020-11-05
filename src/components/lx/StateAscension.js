@@ -12,6 +12,7 @@ class StateAscension extends Component{
                 {this.props.Com}
                 <p>
                     <img src={Img} alt="" />
+                    <img src={require("../../assets/logo192.png").default} />
                 </p>
             </Fragment>
         )
