@@ -10,11 +10,22 @@ class App extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
-      Com: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      Com: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      text: "",
+      Name: "勒布朗·詹姆斯",
+      name1: ""
     }
   }
   ModifyValue = () => {
     this.setState({ Com: "AAAAAAAAAAAAAAAAAAAAAAAAAA" })
+  }
+  func = (value) => {
+    console.log(value);
+    this.setState({ text: value });
+  }
+  GetFuncInfo = (value) => {
+    console.log(value);
+    this.setState({ name1: value });
   }
   render() {
     return (
@@ -29,10 +40,12 @@ class App extends React.Component{
         <Com {...ObjClass} />
         <FatherCom />
         <LxReact {...this.state} />
-        <StateAscension {...this.state} />
+        <StateAscension Name={this.state.Name} func={this.func} FuncInfo={this.GetFuncInfo} />
         <p>
           <button onClick={this.ModifyValue}>修改组件值</button>
         </p>
+        <p>{this.state.text}</p>
+        <p>{this.state.name1}</p>
       </div>
     );
   }
