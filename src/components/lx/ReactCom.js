@@ -1,4 +1,5 @@
 import React from "react";
+import PubSub from "pubsub-js";
 
 class LxReact extends React.Component{
     // 在ES6中 不管写不写constructor 在new实例的时候都会补上constructor
@@ -14,11 +15,23 @@ class LxReact extends React.Component{
         this.state = {
             name: "CzzLxReact组件",
             newHtml: "<p>AAAAAAAA</p>",
-            bool: true
+            bool: true,
+            Czzz: "GGGGGGGGGGGGGGGGGGGGGGGGGGG"
         }
 
         // 创建ref
         this.myRef = React.createRef();
+
+        // 挂载前
+        // console.log("挂载前-----constructor-----");
+    }
+    // 挂载后接收
+    componentDidMount() {
+         // 接收同级组件传来的值
+         PubSub.subscribe("event", (msg, data) => {
+            console.log(msg, data);
+            this.setState({ Czzz: data });
+        })
     }
     // 匿名函数
     changeName = () => {
@@ -121,6 +134,7 @@ class LxReact extends React.Component{
                 <p>我是谁：{text}</p>
                 <p>三元运算符：{this.state.bool ? "BBB" : "CCC"}</p>
                 {this.props.Com}
+                <p>{this.state.Czzz}</p>
             </div>
         )
     }

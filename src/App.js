@@ -5,31 +5,62 @@ import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
 import LxReact from "./components/lx/ReactCom";
 import StateAscension from "./components/lx/StateAscension";
+import DataRequest from "./components/lx/DataRequest";
+import Home from "./containers/home";
+import Person from "./containers/person";
+// Route, Link, NavLink, Switch, Redirect
+import { Route, NavLink, Switch, Redirect, withRouter } from "react-router-dom";
 
 class App extends React.Component{
+  // withRouter 高阶组件（HOC） 不是路由切换的组件 具有路由切换组件的功能
+  // history.listen 监听路由变化
   constructor(props) {
     super(props)
+    props.history.listen((link) => {
+      console.log("Link", link);
+    })
     this.state = {
       Com: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       text: "",
       Name: "勒布朗·詹姆斯",
       name1: ""
     }
+    console.log(props);
   }
   ModifyValue = () => {
     this.setState({ Com: "AAAAAAAAAAAAAAAAAAAAAAAAAA" })
   }
   func = (value) => {
-    console.log(value);
     this.setState({ text: value });
   }
   GetFuncInfo = (value) => {
     console.log(value);
     this.setState({ name1: value });
   }
+  ToRouterHomeB() {
+    this.props.history.push({
+      pathname: "/Home/HomeB",
+      query: { name: "CCCC" }
+    });
+  }
+  ToRouterHomeA = () => {
+    this.props.history.push("/");
+  }
   render() {
     return (
       <div className="App">
+        <button onClick={this.ToRouterHomeB.bind(this)} style={{ marginRight: "20px" }}>点击跳转到HomeB</button>
+        <button onClick={this.ToRouterHomeA}>点击跳转到HomeA</button>
+        <NavLink to="/Home">点击Home</NavLink>
+        {/* <NavLink to="/Person/我是参数AAA">点击Person</NavLink> */}
+        <NavLink to={{ pathname: "/Person", query: { data: "我是参数BBB" } }}>点击Person</NavLink>
+        <Switch>
+          {/* <Route path="/" exact component={Home}></Route> */}
+          <Redirect from="/" to="/Home" exact />
+          <Route path="/Home" component={Home}></Route>
+          <Route path="/Person" component={Person}></Route>
+          {/* <Route path="/Person/:data" component={Person}></Route> */}
+        </Switch>
         React
         {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -46,6 +77,7 @@ class App extends React.Component{
         </p>
         <p>{this.state.text}</p>
         <p>{this.state.name1}</p>
+        <DataRequest />
       </div>
     );
   }
@@ -132,4 +164,4 @@ function Render() {
   );
 }
 
-export default App;
+export default withRouter(App);

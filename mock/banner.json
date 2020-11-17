@@ -1,0 +1,15 @@
+{
+    "code": "200",
+    "message": "获取轮播图的数据",
+    "data": [{
+        "bannerid": "banner_1",
+        "img": "https://m.360buyimg.com/mobilecms/s700x280_jfs/t1/89951/22/13835/67854/5e64a4b8E84c207d9/7367dad332fe905b.jpg!cr_1125x445_0_171!q70.jpg.dpg",
+        "href": "",
+        "alt": ""
+    },{
+        "bannerid": "banner_4",
+        "img": "https://m.360buyimg.com/mobilecms/s700x280_jfs/t1/93827/39/13300/60640/5e561c60Edd0d8e34/73428f511893f63e.jpg!cr_1125x445_0_171!q70.jpg.dpg",
+        "href": "",
+        "alt": ""
+    }]
+}
